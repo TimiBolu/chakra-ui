@@ -13,11 +13,12 @@ export interface SelectFieldProps
    * The placeholder text for the select field
    */
   placeholder?: string
+  usePlaceHolderAsOption?: boolean;
 }
 
 export const SelectField = forwardRef<SelectFieldProps, "select">(
   function SelectField(props, ref) {
-    const { children, placeholder, className, ...rest } = props
+    const { children, placeholder, usePlaceHolderAsOption = true, className, ...rest } = props
 
     return (
       <chakra.select
@@ -25,7 +26,7 @@ export const SelectField = forwardRef<SelectFieldProps, "select">(
         ref={ref}
         className={cx("chakra-select", className)}
       >
-        {placeholder && <option value="">{placeholder}</option>}
+        {usePlaceHolderAsOption && <option value="">{placeholder}</option>}
         {children}
       </chakra.select>
     )
